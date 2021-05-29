@@ -61,9 +61,16 @@ function nextSequence() {
   var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
+  
+  var i=0;//this variable is required for setTimeout
+  //now the animation will run for each value inside the pattern
+  gamePattern.forEach((color) => {
+    setTimeout(() => {
+      $("#" + color).fadeIn(100).fadeOut(100).fadeIn(100);
+      playSound(color);
+    }, 100*(i++));//need to increase the timer, so that it goes one after another
+  })
 
-  $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
-  playSound(randomChosenColour);
 }
 
 function animatePress(currentColor) {
